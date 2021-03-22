@@ -9,9 +9,9 @@ Future<void> main() async {
     height: 100,
   );
 
-  final color = Colors.white;
+  const color = Colors.white;
   const elevation = 2.0;
-  const borderonForeground = false;
+  const borderOnForeground = false;
   const padding = EdgeInsets.symmetric(horizontal: 12, vertical: 8);
   const margin = EdgeInsets.all(1);
   const title = GFListTile(
@@ -19,18 +19,23 @@ Future<void> main() async {
     icon: Icon(Icons.favorite_border),
   );
   const content = Text('Hello');
-  final borderradius = BorderRadius.circular(10);
+  final borderRadius = BorderRadius.circular(10);
   const border = Border(top: BorderSide(color: Colors.black));
 
   testWidgets('GF Card can be created.', (tester) async {
     final GFCard card = GFCard(
-        color: color,
-        elevation: elevation,
-        borderOnForeground: borderonForeground,
-        padding: padding,
-        margin: margin,
-        title: title,
-        content: childWidget);
+      color: color,
+      elevation: elevation,
+      borderOnForeground: borderOnForeground,
+      padding: padding,
+      margin: margin,
+      title: title,
+      content: childWidget,
+      image: Image.network(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
+    );
 
     final TestApp app = TestApp(card);
 
@@ -40,7 +45,7 @@ Future<void> main() async {
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.color, color);
     expect(app.card.elevation, elevation);
-    expect(app.card.borderOnForeground, borderonForeground);
+    expect(app.card.borderOnForeground, borderOnForeground);
     expect(app.card.padding, padding);
     expect(app.card.margin, margin);
     expect(app.card.title, title);
@@ -52,16 +57,20 @@ Future<void> main() async {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [Colors.red, Colors.pink]);
-    const GFCard card = GFCard(
+    final GFCard card = GFCard(
       gradient: gradient,
       elevation: elevation,
-      borderOnForeground: borderonForeground,
+      borderOnForeground: borderOnForeground,
       padding: padding,
       margin: margin,
       title: title,
+      image: Image.network(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
-    const TestApp app = TestApp(card);
+    final TestApp app = TestApp(card);
 
     await tester.pumpWidget(app);
 
@@ -69,7 +78,7 @@ Future<void> main() async {
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.gradient, gradient);
     expect(app.card.elevation, elevation);
-    expect(app.card.borderOnForeground, borderonForeground);
+    expect(app.card.borderOnForeground, borderOnForeground);
     expect(app.card.padding, padding);
     expect(app.card.margin, margin);
     expect(app.card.title, title);
@@ -85,6 +94,8 @@ Future<void> main() async {
       image: bgImage,
       title: title,
       clipBehavior: clip,
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
@@ -98,63 +109,69 @@ Future<void> main() async {
     final bgImage = Image.network(
       'https://images.unsplash.com/photo-1547721064-da6cfb341d50',
     );
-    const boxfit = BoxFit.cover;
+    const boxFit = BoxFit.cover;
 
     final GFCard card = GFCard(
       image: bgImage,
       title: title,
-      boxFit: boxfit,
+      boxFit: boxFit,
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
 
     expect(app.card.image, bgImage);
     expect(app.card.title, title);
-    expect(app.card.boxFit, boxfit);
+    expect(app.card.boxFit, boxFit);
   });
 
   testWidgets('GF Card with background image & image overlay.', (tester) async {
     final bgImage = Image.network(
       'https://images.unsplash.com/photo-1547721064-da6cfb341d50',
     );
-    const boxfit = BoxFit.cover;
-    const imageoverlay = NetworkImage(
+    const boxFit = BoxFit.cover;
+    const imageOverlay = NetworkImage(
         'https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg');
 
     final GFCard card = GFCard(
       image: bgImage,
       title: title,
-      boxFit: boxfit,
-      imageOverlay: imageoverlay,
+      boxFit: boxFit,
+      imageOverlay: imageOverlay,
     );
 
     final TestApp app = TestApp(card);
 
     expect(app.card.image, bgImage);
     expect(app.card.title, title);
-    expect(app.card.boxFit, boxfit);
-    expect(app.card.imageOverlay, imageoverlay);
+    expect(app.card.boxFit, boxFit);
+    expect(app.card.imageOverlay, imageOverlay);
   });
 
   testWidgets('GF Card with semantic container.', (tester) async {
-    const scontainer = false;
+    const isSemanticContainer = false;
 
-    const GFCard card = GFCard(
-      semanticContainer: scontainer,
+    final GFCard card = GFCard(
+      semanticContainer: isSemanticContainer,
       elevation: elevation,
-      borderOnForeground: borderonForeground,
+      borderOnForeground: borderOnForeground,
       title: title,
+      image: Image.network(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
-    const TestApp app = TestApp(card);
+    final TestApp app = TestApp(card);
 
     await tester.pumpWidget(app);
 
     await tester.pumpWidget(Container(child: childWidget));
     expect(find.byWidget(childWidget), findsOneWidget);
-    expect(app.card.semanticContainer, scontainer);
+    expect(app.card.semanticContainer, isSemanticContainer);
     expect(app.card.elevation, elevation);
-    expect(app.card.borderOnForeground, borderonForeground);
+    expect(app.card.borderOnForeground, borderOnForeground);
     expect(app.card.title, title);
   });
 
@@ -162,19 +179,21 @@ Future<void> main() async {
     final bgImage = Image.network(
       'https://images.unsplash.com/photo-1547721064-da6cfb341d50',
     );
-    const titleposition = GFPosition.end;
+    const titlePosition = GFPosition.end;
 
     final GFCard card = GFCard(
       image: bgImage,
       title: title,
-      titlePosition: titleposition,
+      titlePosition: titlePosition,
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
 
     expect(app.card.image, bgImage);
     expect(app.card.title, title);
-    expect(app.card.titlePosition, titleposition);
+    expect(app.card.titlePosition, titlePosition);
   });
 
   testWidgets('GF Card with border & border radius.', (tester) async {
@@ -182,11 +201,14 @@ Future<void> main() async {
       'https://images.unsplash.com/photo-1547721064-da6cfb341d50',
     );
     final GFCard card = GFCard(
-        title: title,
-        border: border,
-        borderRadius: borderradius,
-        image: bgImage,
-        content: content);
+      title: title,
+      border: border,
+      borderRadius: borderRadius,
+      image: bgImage,
+      content: content,
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
+    );
 
     final TestApp app = TestApp(card);
 
@@ -194,16 +216,16 @@ Future<void> main() async {
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.title, title);
     expect(app.card.border, border);
-    expect(app.card.borderRadius, borderradius);
+    expect(app.card.borderRadius, borderRadius);
     expect(app.card.content, content);
     expect(app.card.image, bgImage);
   });
 
-  testWidgets('GF Card with custom buttonbar.', (tester) async {
+  testWidgets('GF Card with custom button bar.', (tester) async {
     final bgImage = Image.network(
       'https://images.unsplash.com/photo-1547721064-da6cfb341d50',
     );
-    const custombuttonbar = GFButtonBar(
+    const customButtonBar = GFButtonBar(
       children: <Widget>[
         GFButton(
           onPressed: null,
@@ -216,9 +238,11 @@ Future<void> main() async {
     final GFCard card = GFCard(
       color: color,
       elevation: elevation,
-      buttonBar: custombuttonbar,
+      buttonBar: customButtonBar,
       title: title,
       image: bgImage,
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
@@ -227,18 +251,22 @@ Future<void> main() async {
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.color, color);
     expect(app.card.elevation, elevation);
-    expect(app.card.buttonBar, custombuttonbar);
+    expect(app.card.buttonBar, customButtonBar);
     expect(app.card.image, bgImage);
   });
 
   testWidgets('GF Card with custom title.', (tester) async {
-    const customtitle = GFListTile(
+    const customTitle = GFListTile(
       titleText: 'Card Title',
       icon: Icon(Icons.favorite_border),
     );
     final GFCard card = GFCard(
       color: color,
-      title: customtitle,
+      title: customTitle,
+      image: Image.network(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
@@ -248,20 +276,24 @@ Future<void> main() async {
     await tester.pumpWidget(Container(child: childWidget));
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.color, color);
-    expect(app.card.title, customtitle);
+    expect(app.card.title, customTitle);
   });
 
-  testWidgets('GF Card with GFAvatar & Subtitle in title section.',
+  testWidgets('GF Card with GFAvatar & subTitle in title section.',
       (tester) async {
-    const customtitle = GFListTile(
+    const customTitle = GFListTile(
       avatar: GFAvatar(),
       titleText: 'Card Title',
-      subtitleText: 'Sub title',
+      subTitleText: 'Sub title',
       icon: Icon(Icons.favorite_border),
     );
     final GFCard card = GFCard(
       color: color,
-      title: customtitle,
+      title: customTitle,
+      image: Image.network(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
+      imageOverlay: const NetworkImage(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
@@ -271,24 +303,26 @@ Future<void> main() async {
     await tester.pumpWidget(Container(child: childWidget));
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.color, color);
-    expect(app.card.title, customtitle);
+    expect(app.card.title, customTitle);
   });
 
-  testWidgets('GF Card with full background image & buttonbar.',
+  testWidgets('GF Card with full background image & button bar.',
       (tester) async {
-    const imageoverlay = NetworkImage(
+    const imageOverlay = NetworkImage(
         'https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg');
-    final colorfilter =
+    final colorFilter =
         ColorFilter.mode(Colors.black.withOpacity(0.67), BlendMode.darken);
-    const customtitle = GFListTile(
+    const customTitle = GFListTile(
       titleText: 'Card Title',
-      subtitleText: 'Sub title',
+      subTitleText: 'Sub title',
     );
     final GFCard card = GFCard(
       color: color,
-      title: customtitle,
-      imageOverlay: imageoverlay,
-      colorFilter: colorfilter,
+      title: customTitle,
+      imageOverlay: imageOverlay,
+      colorFilter: colorFilter,
+      image: Image.network(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
@@ -296,25 +330,25 @@ Future<void> main() async {
     await tester.pumpWidget(Container(child: childWidget));
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.color, color);
-    expect(app.card.title, customtitle);
-    expect(app.card.imageOverlay, imageoverlay);
-    expect(app.card.colorFilter, colorfilter);
+    expect(app.card.title, customTitle);
+    expect(app.card.imageOverlay, imageOverlay);
+    expect(app.card.colorFilter, colorFilter);
   });
 
   testWidgets(
-      'GF Card with full background image , customized title & buttonbar.',
+      'GF Card with full background image, customized title & button bar.',
       (tester) async {
-    const imageoverlay = NetworkImage(
+    const imageOverlay = NetworkImage(
         'https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg');
-    final colorfilter =
+    final colorFilter =
         ColorFilter.mode(Colors.black.withOpacity(0.67), BlendMode.darken);
-    const customtitle = GFListTile(
+    const customTitle = GFListTile(
       avatar: GFAvatar(),
       titleText: 'Card Title',
-      subtitleText: 'Sub title',
+      subTitleText: 'Sub title',
       icon: Icon(Icons.favorite_border),
     );
-    const custombuttonbar = GFButtonBar(
+    const customButtonBar = GFButtonBar(
       children: <Widget>[
         GFButton(
           onPressed: null,
@@ -326,10 +360,12 @@ Future<void> main() async {
     );
     final GFCard card = GFCard(
       color: color,
-      title: customtitle,
-      imageOverlay: imageoverlay,
-      colorFilter: colorfilter,
-      buttonBar: custombuttonbar,
+      title: customTitle,
+      imageOverlay: imageOverlay,
+      colorFilter: colorFilter,
+      buttonBar: customButtonBar,
+      image: Image.network(
+          'https://cdn.pixabay.com/photo/2021/02/01/16/22/flamingo-5971206__340.jpg'),
     );
 
     final TestApp app = TestApp(card);
@@ -337,10 +373,10 @@ Future<void> main() async {
     await tester.pumpWidget(Container(child: childWidget));
     expect(find.byWidget(childWidget), findsOneWidget);
     expect(app.card.color, color);
-    expect(app.card.title, customtitle);
-    expect(app.card.imageOverlay, imageoverlay);
-    expect(app.card.colorFilter, colorfilter);
-    expect(app.card.buttonBar, custombuttonbar);
+    expect(app.card.title, customTitle);
+    expect(app.card.imageOverlay, imageOverlay);
+    expect(app.card.colorFilter, colorFilter);
+    expect(app.card.buttonBar, customButtonBar);
   });
 }
 
